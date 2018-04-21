@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -27,6 +28,11 @@ module.exports = {
       new HtmlWebpackPlugin({
         title: 'My Webpack Boilerplate',
         template: 'index.html'
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        reportFilename: 'bundle_analyze.html',
+        openAnalyzer: false
       })
     ],
     module: {
