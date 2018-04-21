@@ -8,7 +8,7 @@ import { appService } from './service/app';
   const t : any = window;
 
   t.TEST = async () => {
-    const { AppMain } = await import('./component/Main/');
+    const { AppMain } = await import(/* webpackChunkName: "Main" */ './component/Main/');
 
     if (appService.isDEBUG) {
       console.log('Running in DEBUG mode');

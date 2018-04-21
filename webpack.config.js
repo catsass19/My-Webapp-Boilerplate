@@ -40,7 +40,7 @@ module.exports = (env, options) => {
         },
         optimization: {
             runtimeChunk: {
-                name: "manifest"
+                name: "runtime"
             },
             splitChunks: {
                 cacheGroups: {
