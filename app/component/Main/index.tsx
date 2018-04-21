@@ -14,6 +14,4 @@ class Main extends React.Component {
 
 const AppMain = <Main />;
 
-export {
-    AppMain
-};
+export { AppMain };

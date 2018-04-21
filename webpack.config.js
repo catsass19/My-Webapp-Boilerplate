@@ -39,7 +39,9 @@ module.exports = (env, options) => {
             publicPath: '/',
         },
         optimization: {
-            runtimeChunk: false,
+            runtimeChunk: {
+                name: "manifest"
+            },
             splitChunks: {
                 cacheGroups: {
                     commons: {

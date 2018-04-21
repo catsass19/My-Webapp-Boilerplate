@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "lib": ["es2015", "es2017", "dom"],
+    "module": "esnext",
+    "lib": ["esnext", "dom"],
     "target": "es5",
     "sourceMap": true,
-    "jsx": "react"
+    "jsx": "react",
+    "importHelpers": true,
+    "moduleResolution": "node"
   },
   "include": [
     "./app/**/*.ts",

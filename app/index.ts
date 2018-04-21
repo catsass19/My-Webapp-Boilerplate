@@ -3,10 +3,18 @@ import * as ReactDOM from 'react-dom';
 
 import { appService } from './service/app';
 
-import { AppMain } from './component/Main/';
+(async () => {
 
-if (appService.isDEBUG) {
-  console.log('Running in DEBUG mode');
-}
+  const t : any = window;
 
-ReactDOM.render(AppMain, document.getElementById('content'));
+  t.TEST = async () => {
+    const { AppMain } = await import('./component/Main/');
+
+    if (appService.isDEBUG) {
+      console.log('Running in DEBUG mode');
+    }
+
+    ReactDOM.render(AppMain, document.getElementById('content'));
+  };
+
+})();
