@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -5,14 +6,18 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = (env, options) => {
 
+    const isProduction = options.mode === 'production';
+
     const plugins = [
         new HtmlWebpackPlugin({
-            title: 'My Webpack Boilerplate',
             template: 'index.html'
-          }),
+        }),
+        new webpack.DefinePlugin({
+            'MODE': JSON.stringify(options.mode)
+        }),
     ];
 
-    if (options.mode === 'production') {
+    if (isProduction) {
         plugins.push(
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
@@ -23,9 +28,9 @@ module.exports = (env, options) => {
     }
 
     return {
-        devtool: 'inline-source-map',
+        devtool: isProduction? '' : 'inline-source-map',
         entry: {
-            app: './app/app.ts',
+            app: './app/index.ts',
         },
         output: {
             filename: '[name].[chunkhash].js',
