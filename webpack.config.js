@@ -23,6 +23,7 @@ module.exports = (env, options) => {
     }
 
     return {
+        devtool: 'inline-source-map',
         entry: {
             app: './app/app.ts',
         },
@@ -54,7 +55,7 @@ module.exports = (env, options) => {
                 },
                 {
                     test: /\.tsx?$/,
-                    loader: 'ts-loader',
+                    loader: 'tslint-loader',
                     exclude: /node_modules/,
                 },
             ]

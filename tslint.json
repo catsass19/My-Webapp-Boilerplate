@@ -17,6 +17,7 @@
     "object-literal-key-quotes": false,
     "max-line-length": [true, 150],
     "ordered-imports": false,
+    "quotemark": [true, "single"],
     "typedef-whitespace": [
       true,
       {
