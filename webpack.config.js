@@ -2,10 +2,26 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: path.join(__dirname, './app/app.ts'),
+    entry: {
+        app: './app/app.ts',
+    },
     output: {
-        filename: 'app.js',
+        filename: '[name].[chunkhash].js',
         path: path.join(__dirname, './build'),
+        chunkFilename: '[name].[chunkhash].js',
+        publicPath: '/',
+    },
+    optimization: {
+        runtimeChunk: false,
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                  test: /[\\/]node_modules[\\/]/,
+                  name: 'vendor',
+                  chunks: 'all',
+                }
+              }
+        }
     },
     plugins: [
       new HtmlWebpackPlugin({
