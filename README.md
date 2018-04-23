@@ -7,5 +7,6 @@
 - implemented runtime performance analyzer (on-going)
 
 todo:
-support SASS
-different build (electron maybe?)
+- support SASS
+- PWA
+- different build (electron maybe?)
