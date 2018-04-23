@@ -6,7 +6,11 @@
     "sourceMap": true,
     "jsx": "react",
     "importHelpers": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./app/*"]
+    }
   },
   "include": [
     "./app/**/*.ts",

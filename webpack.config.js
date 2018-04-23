@@ -68,7 +68,10 @@ module.exports = (env, options) => {
             ]
         },
         resolve: {
-            extensions: [".tsx", ".ts", ".js"]
+            extensions: [".tsx", ".ts", ".js"],
+            alias: {
+                '@': path.resolve(__dirname, 'app/')
+            }
         },
     }
 };

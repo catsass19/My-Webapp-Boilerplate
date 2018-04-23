@@ -1,6 +1,7 @@
 {
   "extends": ["tslint:latest"],
   "rules": {
+    "no-implicit-dependencies": false,
     "jsx-wrap-multiline": false,
     "only-arrow-functions": true,
     "no-submodule-imports": false,
