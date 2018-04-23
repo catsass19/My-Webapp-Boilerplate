@@ -1,6 +1,7 @@
 {
   "extends": ["tslint:latest"],
   "rules": {
+    "indent": [true, "spaces", 4],
     "no-implicit-dependencies": false,
     "jsx-wrap-multiline": false,
     "only-arrow-functions": true,

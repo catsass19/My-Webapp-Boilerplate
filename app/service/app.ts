@@ -2,7 +2,7 @@ declare const MODE : string;
 
 class AppService {
 
-  public isDEBUG : boolean = (MODE === 'development');
+    public isDEBUG : boolean = (MODE === 'development');
 
 }
 
