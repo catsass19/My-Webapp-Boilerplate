@@ -3,14 +3,21 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-
 module.exports = (env, options) => {
 
     const isProduction = options.mode === 'production';
 
+    let _basePath = '/';
+    const { BASE_URL } = process.env;
+    if (isProduction && BASE_URL && (typeof BASE_URL === 'string')) {
+        _basePath = BASE_URL;
+        console.log(`Base url of this build is: ${_basePath}`);
+    }
+
     const plugins = [
         new HtmlWebpackPlugin({
-            template: 'index.html'
+            template: './app/index.html',
+            favicon: './app/favicon.ico'
         }),
         new webpack.DefinePlugin({
             'MODE': JSON.stringify(options.mode)
@@ -36,7 +43,7 @@ module.exports = (env, options) => {
             filename: '[name].[chunkhash].js',
             path: path.join(__dirname, './build'),
             chunkFilename: '[name].[chunkhash].js',
-            publicPath: '/',
+            publicPath: _basePath,
         },
         optimization: {
             runtimeChunk: {
@@ -65,6 +72,14 @@ module.exports = (env, options) => {
                     loader: 'tslint-loader',
                     exclude: /node_modules/,
                 },
+                {
+                    test: /.*\.(gif|png|jpe?g|svg)$/i,
+                    loader: 'file-loader',
+                    options: {
+                      name: '/[name]_[hash:7].[ext]',
+                      outputPath: 'assets/'
+                    }
+                }
             ]
         },
         resolve: {
@@ -73,5 +88,16 @@ module.exports = (env, options) => {
                 '@': path.resolve(__dirname, 'app/')
             }
         },
+        devServer: {
+            /*
+            proxy: {
+                "/api": {
+                    target: "http://localhost:1234/",
+                    secure: false,
+                    pathRewrite: {"^/api" : ""}
+                }
+            }
+            */
+        }
     }
 };

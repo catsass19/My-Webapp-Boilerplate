@@ -1,10 +1,11 @@
 import * as React from 'react';
+import Logo from '@/assets/logo.png';
 
 class Main extends React.Component {
     public render() {
         return (
-          <div> s
-              TEST
+          <div>
+              <img src={Logo} />
           </div>
         );
     }
