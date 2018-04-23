@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --mode development --progress",
-    "build": "webpack --mode production --progress"
+    "dev": "webpack-dev-server --mode development --progress --color --host 0.0.0.0",
+    "build": "webpack --mode production --progress",
+    "electron": "export BASE_URL=./ && webpack --mode production --target electron-renderer && electron ./electron.js"
   },
   "repository": {
     "type": "git",
