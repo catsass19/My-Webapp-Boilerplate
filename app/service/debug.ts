@@ -1,3 +1,5 @@
+import round from 'lodash/round';
+
 declare const PerformanceObserver : any; // Hopefully to remove it soon
 
 class DebugService {
@@ -15,11 +17,10 @@ class DebugService {
         }
     }
     private displayLongTask(entry) {
-      console.log(entry);
-      console.log(`Long Task detected. Execution time:`, entry.duration);
+      console.log(`Long Task detected. Execution time:`, round(entry.duration, 3));
     }
     private displayPaintInfo(entry) {
-      console.log(`${entry.name}:`, entry.startTime);
+      console.log(`${entry.name}:`, round(entry.startTime, 3), 'ms');
     }
 
 }

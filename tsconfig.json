@@ -9,7 +9,8 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./app/*"]
+      "@/*": ["./app/*"],
+      "lodash/*": ["node_modules/@types/lodash-es/*"],
     }
   },
   "include": [
