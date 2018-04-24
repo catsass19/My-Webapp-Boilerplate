@@ -75,6 +75,7 @@ module.exports = (env, options) => {
                 {
                     test: /.*\.(gif|png|jpe?g|svg)$/i,
                     loader: 'file-loader',
+                    exclude: /node_modules/,
                     options: {
                       name: '/[name]_[hash:7].[ext]',
                       outputPath: 'assets/'
