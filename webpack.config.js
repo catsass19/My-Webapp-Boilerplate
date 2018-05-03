@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = (env, options) => {
 
@@ -22,6 +23,7 @@ module.exports = (env, options) => {
         new webpack.DefinePlugin({
             'MODE': JSON.stringify(options.mode)
         }),
+        new ForkTsCheckerWebpackPlugin(),
     ];
 
     if (isProduction) {
@@ -64,8 +66,11 @@ module.exports = (env, options) => {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: 'ts-loader',
-                    exclude: /node_modules/
+                    loader: 'ts-loader',
+                    exclude: /node_modules/,
+                    options: {
+                        transpileOnly: true
+                    }
                 },
                 {
                     test: /\.tsx?$/,
