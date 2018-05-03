@@ -30,9 +30,11 @@
     "react-loadable": "^5.3.1"
   },
   "devDependencies": {
+    "cache-loader": "^1.2.2",
     "file-loader": "^1.1.11",
     "fork-ts-checker-webpack-plugin": "^0.4.1",
     "html-webpack-plugin": "^3.2.0",
+    "thread-loader": "^1.1.5",
     "ts-loader": "^4.2.0",
     "tslint": "^5.9.1",
     "tslint-loader": "^3.6.0",
