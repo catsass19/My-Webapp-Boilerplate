@@ -14,7 +14,6 @@ import { appService } from '@/service/app';
         }
 
     }
-
     ReactDOM.render(AppMain, document.getElementById('content'));
 
 })();

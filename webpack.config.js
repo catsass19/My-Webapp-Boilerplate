@@ -2,7 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 
 module.exports = (env, options) => {
 
@@ -23,7 +24,10 @@ module.exports = (env, options) => {
         new webpack.DefinePlugin({
             'MODE': JSON.stringify(options.mode)
         }),
-        new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
+        new ForkTsCheckerWebpackPlugin({
+            checkSyntacticErrors: true,
+            tslint: true
+        }),
     ];
 
     if (isProduction) {
@@ -32,7 +36,11 @@ module.exports = (env, options) => {
                 analyzerMode: 'static',
                 reportFilename: 'bundle_analyze.html',
                 openAnalyzer: false
-            })
+            }),
+        );
+    } else {
+        plugins.push(
+            new CleanTerminalPlugin(),
         );
     }
 
@@ -79,15 +87,11 @@ module.exports = (env, options) => {
                         {
                             loader: 'ts-loader',
                             options: {
-                                happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+                                happyPackMode: true, // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack,
+                                logLevel: 'warn'
                             }
                         }
                     ]
-                },
-                {
-                    test: /\.tsx?$/,
-                    loader: 'tslint-loader',
-                    exclude: /node_modules/,
                 },
                 {
                     test: /.*\.(gif|png|jpe?g|svg)$/i,
@@ -107,6 +111,13 @@ module.exports = (env, options) => {
             }
         },
         devServer: {
+            stats: {
+                all: false,
+                assets: true,
+                errors: true,
+                performance: true,
+                warnings: true,
+            },
             /*
             proxy: {
                 "/api": {
