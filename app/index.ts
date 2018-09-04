@@ -1,4 +1,3 @@
-import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppMain } from '@/component/Main/';
 import { appService } from '@/service/app';
@@ -12,8 +11,8 @@ import { appService } from '@/service/app';
         } catch(err) {
           console.error('Failed to inject debug service', err);
         }
-
     }
+
     ReactDOM.render(AppMain, document.getElementById('content'));
 
 })();

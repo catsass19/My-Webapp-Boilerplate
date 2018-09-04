@@ -55,6 +55,7 @@ module.exports = (env, options) => {
             chunkFilename: '[name].[chunkhash].js',
             publicPath: _basePath,
         },
+        /*
         optimization: {
             runtimeChunk: {
                 name: "runtime"
@@ -69,6 +70,7 @@ module.exports = (env, options) => {
                 }
             }
         },
+        */
         plugins,
         module: {
             rules: [
