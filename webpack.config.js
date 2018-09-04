@@ -4,6 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+const OUTPUT_FOLDER = './build';
 
 module.exports = (env, options) => {
 
@@ -17,6 +20,7 @@ module.exports = (env, options) => {
     }
 
     const plugins = [
+        new CleanWebpackPlugin([OUTPUT_FOLDER], {  watch: false }),
         new HtmlWebpackPlugin({
             template: './app/index.html',
             favicon: './app/favicon.ico'
@@ -51,7 +55,7 @@ module.exports = (env, options) => {
         },
         output: {
             filename: '[name].[chunkhash].js',
-            path: path.join(__dirname, './build'),
+            path: path.join(__dirname, OUTPUT_FOLDER),
             chunkFilename: '[name].[chunkhash].js',
             publicPath: _basePath,
         },
