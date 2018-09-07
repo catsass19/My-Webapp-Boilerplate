@@ -10,7 +10,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest')
 const MANIFEST = require('./app/manifest.json');
 
 const OUTPUT_FOLDER = './build';
-const APP_ICON = './app/favicon.ico';
+const APP_ICON = './app/favicon.png';
 
 module.exports = (env, options) => {
 
@@ -59,7 +59,7 @@ module.exports = (env, options) => {
             icons: [
               {
                 src: path.resolve(APP_ICON),
-                sizes: [96, 128, 192, 256, 384, 512, 1024] // multiple sizes
+                sizes: [96, 128, 192, 256, 512, 1024] // multiple sizes
               }
             ]
           })
@@ -134,8 +134,10 @@ module.exports = (env, options) => {
         devServer: {
             stats: {
                 all: false,
+                // chunks: true,
                 assets: true,
                 errors: true,
+                // timings: true,
                 performance: true,
                 warnings: true,
             },
