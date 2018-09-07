@@ -6,7 +6,8 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
-const WebpackPwaManifest = require('webpack-pwa-manifest')
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const MANIFEST = require('./app/manifest.json');
 
 const OUTPUT_FOLDER = './build';
@@ -26,9 +27,25 @@ module.exports = (env, options) => {
 
     const plugins = [
         new CleanWebpackPlugin([OUTPUT_FOLDER], {  watch: false }),
+        // hope that we can get rid of this once WebpackPwaManifest supports favicon
+        new FaviconsWebpackPlugin({
+            logo: APP_ICON,
+            persistentCache: true,
+            icons: {
+                android: false,
+                appleIcon: false,
+                appleStartup: false,
+                coast: false,
+                favicons: true,
+                firefox: false,
+                opengraph: false,
+                twitter: false,
+                yandex: false,
+                windows: false
+            }
+        }),
         new HtmlWebpackPlugin({
             template: './app/index.html',
-            favicon: APP_ICON,
             title: MANIFEST.name,
             description: MANIFEST.description,
         }),
@@ -59,7 +76,7 @@ module.exports = (env, options) => {
             icons: [
               {
                 src: path.resolve(APP_ICON),
-                sizes: [96, 128, 192, 256, 512, 1024] // multiple sizes
+                sizes: [96, 128, 192, 256, 512] // multiple sizes
               }
             ]
           })
