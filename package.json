@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run test"
+    }
+  },
   "scripts": {
     "test": "jest --coverage",
     "dev": "npm run test && webpack-dev-server --mode development --host 0.0.0.0",
@@ -55,6 +60,7 @@
     "file-loader": "^1.1.11",
     "fork-ts-checker-webpack-plugin": "^0.4.9",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.0.0-rc.13",
     "jest": "^23.5.0",
     "thread-loader": "^1.2.0",
     "ts-jest": "^23.1.4",
