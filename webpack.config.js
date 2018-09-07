@@ -6,8 +6,11 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
+const WebpackPwaManifest = require('webpack-pwa-manifest')
+const MANIFEST = require('./app/manifest.json');
 
 const OUTPUT_FOLDER = './build';
+const APP_ICON = './app/favicon.ico';
 
 module.exports = (env, options) => {
 
@@ -24,9 +27,9 @@ module.exports = (env, options) => {
         new CleanWebpackPlugin([OUTPUT_FOLDER], {  watch: false }),
         new HtmlWebpackPlugin({
             template: './app/index.html',
-            favicon: './app/favicon.ico',
-            title: 'Loris Web App Boilerplate',
-            description: 'Web App Boilerplate based on TypeScript/React/Webpack4'
+            favicon: APP_ICON,
+            title: MANIFEST.name,
+            description: MANIFEST.description,
         }),
         new webpack.DefinePlugin({
             'MODE': JSON.stringify(options.mode)
@@ -45,6 +48,20 @@ module.exports = (env, options) => {
             new CleanTerminalPlugin()
         ),
         new DuplicatePackageCheckerPlugin(),
+        new WebpackPwaManifest({
+            name: MANIFEST.name,
+            short_name: MANIFEST.short_name,
+            description: MANIFEST.description,
+            background_color: MANIFEST.background_color,
+            crossorigin: MANIFEST.crossorigin,
+            ios: MANIFEST.ios,
+            icons: [
+              {
+                src: path.resolve(APP_ICON),
+                sizes: [96, 128, 192, 256, 384, 512, 1024] // multiple sizes
+              }
+            ]
+          })
     ];
 
     return {
