@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --mode development --host 0.0.0.0",
-    "build": "webpack --mode production --progress",
-    "electron": "export BASE_URL=./ && webpack --mode production --target electron-renderer && electron ./electron.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "dev": "npm run test && webpack-dev-server --mode development --host 0.0.0.0",
+    "build": "npm run test && webpack --mode production --progress",
+    "electron": "npm run test && export BASE_URL=./ && webpack --mode production --target electron-renderer && electron ./electron.js"
   },
   "jest": {
     "globals": {

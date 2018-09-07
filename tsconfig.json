@@ -19,6 +19,7 @@
     "./app/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "./app/**/*/__tests__"
   ]
 }
