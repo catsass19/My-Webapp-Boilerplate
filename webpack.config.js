@@ -23,7 +23,9 @@ module.exports = (env, options) => {
         new CleanWebpackPlugin([OUTPUT_FOLDER], {  watch: false }),
         new HtmlWebpackPlugin({
             template: './app/index.html',
-            favicon: './app/favicon.ico'
+            favicon: './app/favicon.ico',
+            title: 'Loris Web App Boilerplate',
+            description: 'Web App Boilerplate based on TypeScript/React/Webpack4'
         }),
         new webpack.DefinePlugin({
             'MODE': JSON.stringify(options.mode)
@@ -32,26 +34,22 @@ module.exports = (env, options) => {
             checkSyntacticErrors: true,
             tslint: true
         }),
-    ];
-
-    if (isProduction) {
-        plugins.push(
+        (isProduction ?
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
                 reportFilename: 'bundle_analyze.html',
                 openAnalyzer: false
-            }),
-        );
-    } else {
-        plugins.push(
-            new CleanTerminalPlugin(),
-        );
-    }
+            })
+            :
+            new CleanTerminalPlugin()
+        ),
+    ];
 
     return {
         devtool: isProduction? '' : 'inline-source-map',
         entry: {
-            app: './app/index.ts',
+            vendor: ['react', 'react-dom'],
+            client: './app/index.ts',
         },
         output: {
             filename: '[name].[chunkhash].js',
@@ -59,22 +57,19 @@ module.exports = (env, options) => {
             chunkFilename: '[name].[chunkhash].js',
             publicPath: _basePath,
         },
-        /*
         optimization: {
-            runtimeChunk: {
-                name: "runtime"
-            },
             splitChunks: {
                 cacheGroups: {
-                    commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
-                    chunks: 'all',
-                    }
+                   vendor: {
+                       chunks: 'initial',
+                       name: 'vendor',
+                       test: 'vendor',
+                       enforce: true,
+                   }
                 }
-            }
+            },
+            runtimeChunk: true,
         },
-        */
         plugins,
         module: {
             rules: [
