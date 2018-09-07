@@ -20,6 +20,7 @@ module.exports = (env, options) => {
     const { BASE_URL } = process.env;
     if (isProduction && BASE_URL && (typeof BASE_URL === 'string')) {
         _basePath = BASE_URL;
+        if (_basePath.substr(-1) != '/') _basePath += '/';
         console.log(`Base url of this build is: ${_basePath}`);
     }
 
