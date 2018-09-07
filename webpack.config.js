@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 
 const OUTPUT_FOLDER = './build';
 
@@ -43,12 +44,13 @@ module.exports = (env, options) => {
             :
             new CleanTerminalPlugin()
         ),
+        new DuplicatePackageCheckerPlugin(),
     ];
 
     return {
         devtool: isProduction? '' : 'inline-source-map',
         entry: {
-            vendor: ['react', 'react-dom'],
+            vendor: ['react', 'react-dom', 'react-loadable'],
             client: './app/index.ts',
         },
         output: {
