@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const MANIFEST = require('./app/manifest.json');
@@ -25,7 +25,7 @@ module.exports = (env, options) => {
     }
 
     const plugins = [
-        new CleanWebpackPlugin([OUTPUT_FOLDER], {  watch: false }),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './app/index.html',
             title: MANIFEST.name,
