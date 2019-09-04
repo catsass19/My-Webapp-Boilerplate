@@ -6,6 +6,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const MANIFEST = require('./app/manifest.json');
 
 const OUTPUT_FOLDER = './build';
@@ -47,6 +48,10 @@ module.exports = (env, options) => {
             new CleanTerminalPlugin()
         ),
         new DuplicatePackageCheckerPlugin(),
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true
+        })
     ];
 
     return {
