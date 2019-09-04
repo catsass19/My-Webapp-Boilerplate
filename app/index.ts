@@ -12,8 +12,8 @@ import appService from '@/service/app';
     }
   }
   if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-       navigator.serviceWorker
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
         .register('/service-worker.js')
         .then(registration => {
           console.log('SW registered: ', registration);
