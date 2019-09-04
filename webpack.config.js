@@ -6,7 +6,6 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
-const WebpackPwaManifest = require('webpack-pwa-manifest');
 const MANIFEST = require('./app/manifest.json');
 
 const OUTPUT_FOLDER = './build';
@@ -48,20 +47,6 @@ module.exports = (env, options) => {
             new CleanTerminalPlugin()
         ),
         new DuplicatePackageCheckerPlugin(),
-        new WebpackPwaManifest({
-            name: MANIFEST.name,
-            short_name: MANIFEST.short_name,
-            description: MANIFEST.description,
-            background_color: MANIFEST.background_color,
-            crossorigin: MANIFEST.crossorigin,
-            ios: MANIFEST.ios,
-            icons: [
-              {
-                src: path.resolve(APP_ICON),
-                sizes: [96, 128, 192, 256, 512] // multiple sizes
-              }
-            ]
-          })
     ];
 
     return {

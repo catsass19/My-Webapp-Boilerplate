@@ -1,4 +1,4 @@
-import { appService } from '../app';
+import appService from '../app';
 
 describe('App service', () => {
   test('', () => {
